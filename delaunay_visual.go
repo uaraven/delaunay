@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 
 	d "github.com/uaraven/delaunay/delaunay"
@@ -37,9 +35,7 @@ func draw() {
 		}
 		rl.DrawText(p.String(), int32(p.X)+5, int32(p.Y), 12, rl.DarkBlue)
 	}
-	y := -200
-	trg := tr.Triangles()
-	for _, t := range trg {
+	for _, t := range tr.Triangles() {
 		var color rl.Color
 		if t.UsesAnyOfVertices(tr.SupertriangleVertices()) {
 			color = rl.Blue
@@ -50,8 +46,6 @@ func draw() {
 		for _, e := range t.Edges() {
 			rl.DrawLine(int32(e.P1.X), int32(e.P1.Y), int32(e.P2.X), int32(e.P2.Y), color)
 		}
-		rl.DrawText(fmt.Sprintf("%v", t), -180, int32(y), 12, rl.Black)
-		y += 15
 	}
 
 }
@@ -64,11 +58,11 @@ func init() {
 
 	// tr = d.InitDelaunay([]d.Point{p1, p2, p3, p4})
 	tr = d.InitDelaunay([]d.Point{
-		d.NewPoint(0, 40),
-		d.NewPoint(40, 0),
-		d.NewPoint(50, 100),
-		d.NewPoint(90, 10),
-		d.NewPoint(100, 60),
+		d.NewPoint(0, 140),
+		d.NewPoint(140, 0),
+		d.NewPoint(150, 200),
+		d.NewPoint(190, 110),
+		d.NewPoint(200, 160),
 	})
 	index = 0
 }
