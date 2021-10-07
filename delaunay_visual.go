@@ -71,7 +71,7 @@ func main() {
 	rl.InitWindow(screenWidth, screenHeight, "Delaunay")
 
 	cam := rl.Camera2D{}
-	cam.Zoom = 1
+	cam.Zoom = 1.1
 	cam.Target = rl.Vector2{X: -300, Y: -400}
 
 	for !rl.WindowShouldClose() {

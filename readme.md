@@ -17,4 +17,4 @@ Usage:
 
 
 Included is `delaunay_visual.go` to view the process of triangulation step by step.
-![](visualizer.png)
+![](visual.gif)
