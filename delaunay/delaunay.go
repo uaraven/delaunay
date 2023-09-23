@@ -216,16 +216,21 @@ func boundingTriangle(points []Point) Triangle {
 	minY := reduce(points, math.MaxInt64, reduceMinY)
 	maxY := reduce(points, math.MinInt64, reduceMaxY)
 
-	bottomLeft := NewPoint(minX-offset, maxY+offset)
-	topRight := NewPoint(maxX+offset, minY-offset)
+	lenX := maxX - minX
+	lenY := maxY - minY
 
-	m := -1 / ((topRight.Y - bottomLeft.Y) / (topRight.X - bottomLeft.X - offset))
-	b := topRight.Y - m*topRight.X
+	centerX := (maxX + minX) / 2
+	centerY := (maxY + minY) / 2
 
-	topLeft := NewPoint(bottomLeft.X, m*bottomLeft.X+b)
-	bottomRight := NewPoint((bottomLeft.Y-b)/m, bottomLeft.Y)
+	radius := math.Hypot(lenX, lenY) * 2
 
-	return NewTriangle(topLeft, bottomRight, NewPoint(minX-offset*5, maxY+offset*5))
+	pointAtAngle := func(angle float64) Point {
+		rads := angle * math.Pi / 180
+		s, c := math.Sincos(rads)
+		return NewPoint(s*radius+centerX, c*radius+centerY)
+	}
+
+	return NewTriangle(pointAtAngle(0), pointAtAngle(120), pointAtAngle(240))
 }
 
 type Delaunay struct {
